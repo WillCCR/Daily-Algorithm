@@ -1,0 +1,29 @@
+#错误解法（超时）
+
+        ans = deque()
+        re = inf #用作后续记录最小值而且不能取0,不一定inf，取len(ans) + 1
+        for i,x in enumerate(nums):
+            if sum(ans) + x < target:
+                ans.append(x)
+            while sum(ans) + x > target: #有while是因为左端可能要连续删除
+                ans.popleft()
+                ans.append(x) #删了也要加
+            else:
+                ans.append(x) #相等了要加
+                re = min(re, len(ans))
+        return re if re < inf else 0
+
+
+#正确解法 同向双指针
+
+        n = len(nums)
+        left = 0 #左指针
+        ans = n + 1
+        x = 0 #总和
+        for right in range(n): #右指针
+            x += nums[right]
+            while left <= right and x >= target: #等号代表单个元素，也是符合的
+                ans = min(ans, right - left + 1)
+                x -= nums[left]
+                left += 1
+        return ans if ans <= n else 0
