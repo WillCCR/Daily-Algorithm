@@ -1,0 +1,12 @@
+#同向双指针+哈希表
+        ans = 0
+        n = len(s)
+        left = 0
+        cnt = Counter()
+        for right, c in enumerate(s):
+            cnt[c] += 1
+            while left <= right and cnt[c] > 1:
+                cnt[s[left]] -= 1
+                left += 1
+            ans = max(ans, right - left + 1)
+        return ans
