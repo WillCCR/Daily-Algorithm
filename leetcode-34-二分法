@@ -1,0 +1,53 @@
+def lower_bound(nums: List[int], target: int) -> int: #输出的是 <= target的下标
+    left = -1
+    n = len(nums)
+    right = n
+    while left + 1 < right:
+        mid = (right - left) // 2 + left
+        if nums[mid] < target:
+            left = mid
+        else:
+            right = mid
+    return right
+
+def upper_bound(nums: List[int], target: int) -> int: #输出的是 >= target的下标
+    left = -1
+    right = len(nums)
+    while left + 1 < right:
+        mid = (right - left) // 2 + left
+        if nums[mid] <= target:
+            left = mid
+        else:
+            right = mid
+    return left #如果改成right会变成 > target的第一个下标
+
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        left = lower_bound(nums, target)
+        if left == len(nums) or nums[left] != target: #这里的left是上面左边界返回的right
+            return [-1, -1]
+        right = upper_bound(nums, target)
+        return [left, right]
+###########################################################################################################
+简化--由于lower_bound返回的下标不一定等于target，如果所有数都小于t则返回n，如果不存在，返回>target的第一个下标
+def lower_bound(nums: List[int], target: int) -> List[int]:
+        left = -1
+        right = len(nums)
+        while left+1 < right:
+            mid = left + (right - left) // 2
+            if nums[mid] < target:
+                left = mid
+            else:
+                right = mid
+        return right
+
+
+class Solution:
+    
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        start = lower_bound(nums, target)
+        if start == len(nums) or nums[start] != target:
+            return [-1,-1]
+        end = lower_bound(nums, target+1) - 1 #######
+        return[start, end]
+
