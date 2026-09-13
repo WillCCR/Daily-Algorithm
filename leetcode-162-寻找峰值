@@ -1,0 +1,30 @@
+#用二分法寻找峰值
+
+        n = len(nums)
+        left = -1 #下面循环条件必须left+1<right,否则剩1个元素时会询问到-1这个下标
+        right = n-1
+        while left + 1 < right:
+            mid = (right - left) // 2 + left
+            if nums[mid] > nums[mid+1]:
+                right = mid
+            else: #题目标定不会有mid 和 mid+1 的数相等情况
+                left = mid
+        return right
+
+
+#######################################
+    n = len(nums)
+    left = 0 #从0开始
+    right = n - 1
+
+    while left < right: #与left的取值对应
+        mid = left + (right - left) // 2
+
+        if nums[mid] > nums[mid + 1]:
+            # 当前处于下降段，峰值在 mid 或左侧
+            right = mid
+        else:
+            # 当前处于上升段，峰值一定在 mid 右侧
+            left = mid + 1
+
+    return left
