@@ -1,0 +1,12 @@
+        n = len(nums)
+        if nums[0] < nums[-1]:
+            return nums[0]
+        left = -1
+        right = n - 1
+        while left + 1 < right:
+            mid = (right - left) // 2 + left
+            if nums[mid] < nums[-1]: #以最后一个数作为参照
+                right = mid
+            else:
+                left = mid
+        return nums[right]
