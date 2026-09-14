@@ -5,7 +5,7 @@
         right = n - 1
         while left + 1 < right:
             mid = (right - left) // 2 + left
-            if nums[mid] < nums[-1]: #以最后一个数作为参照
+            if nums[mid] < nums[-1]: #以最后一个数作为参照,能区分两个上升的区间
                 right = mid
             else:
                 left = mid
