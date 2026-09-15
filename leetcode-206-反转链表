@@ -1,0 +1,20 @@
+#错误写法
+        pre = None
+        cur = head
+        nxt = head.next #这里出错，如果head是none则报错，nxt没必要初始化
+        while cur:
+            cur.next = pre
+            pre = cur
+            cur = nxt
+            nxt = cur.next
+        return pre
+
+#正确写法#
+        pre = None
+        cur = head
+        while cur:
+            nxt = cur.next ###重点
+            cur.next = pre
+            pre = cur
+            cur = nxt
+        return pre
