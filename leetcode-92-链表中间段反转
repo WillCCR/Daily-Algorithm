@@ -1,0 +1,17 @@
+        dummy = ListNode(next = head) #哨兵节点，为了应对从开头反转情况
+        P0 = dummy
+        for _ in range(left - 1): #这里是让P0到反转开始节点前一个节点
+            P0 = P0.next
+        
+        pre = None #这里就是让这中间段节点拆分开来反转
+        cur = P0.next
+        for _ in range(right - left + 1): #让cur从开始节点到末尾后面一个None
+            nxt = cur.next
+            cur.next = pre
+            pre = cur
+            cur = nxt
+
+        P0.next.next = cur #必须这个先，P0节点本身未变
+        P0.next = pre
+
+        return dummy.next
