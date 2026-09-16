@@ -1,0 +1,21 @@
+       dummy = ListNode(next = head)
+        n = 0
+        cur = head
+        while cur:
+            n += 1
+            cur = cur.next
+        p0 = dummy
+        cur = head
+        while n >= k: #这里要有等于号
+            n -= k
+            pre = None
+            for _ in range(k):
+                nxt = cur.next
+                cur.next = pre
+                pre = cur
+                cur = nxt
+            p0.next.next = cur
+            p1 = p0.next
+            p0.next = pre
+            p0 = p1
+        return dummy.next
