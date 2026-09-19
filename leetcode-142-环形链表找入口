@@ -1,0 +1,12 @@
+#使用公式，当快慢节点在闭环里面第一次相遇放出头节点，则慢节点和这个头节点一定在入口相遇
+        slow = fast = head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+            if fast is slow:
+                p0 = head
+                while head is not slow:
+                    head = head.next
+                    slow = slow.next
+                return head
+        return None
