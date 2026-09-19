@@ -1,0 +1,32 @@
+        def middleNode(self, head: Optional[ListNode]) -> Optional[ListNoede]:
+            slow = fast = head
+            while fast and fast.next:
+                slow = slow.next
+                fast = fast.next.next
+            return slow
+
+        def reverseList(self, head: Optional[ListNode]) -> Optional[ListNoede]:
+            cur = head
+            pre = None
+            while cur:
+                nxt = cur.next
+                cur.next = pre
+                pre = cur
+                cur = nxt
+            return pre
+        
+        def reorderList(self, head: Optional[ListNode]) -> None:
+        # """
+        # Do not return anything, modify head in-place instead.
+        # """
+            mid = self.middleNode(head)
+            head2 = self.reverseList(mid)
+            head1 = head
+            
+            while head2.next: #必须用head2，因为如果链表是偶数，由于上面的反转使用mid节点反转，则左右分段链表都指向mid节点，则head1长度一定长于head2
+                nxt1 = head1.next
+                head1.next = head2
+                nxt2 = head2.next
+                head2.next = nxt1
+                head2 = nxt2
+                head1 = nxt1
