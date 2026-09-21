@@ -1,0 +1,25 @@
+#法1--改为正序，找到删除节点前一个节点
+        dummy = ListNode(next = head)
+        cur = head
+        m = 0
+        while cur:
+            cur = cur.next
+            m += 1
+        k = m - n
+        p0 = dummy
+        for _ in range(k):
+            p0 = p0.next
+        p0.next = p0.next.next
+        return dummy.next
+
+#法2--单相双指针，当right走到右边，left刚好和right差n
+        # dummy = ListNode(next=head)
+        # right = left = dummy
+        # for _ in range(n):
+        #     right = right.next
+        # while right.next:
+        #     left = left.next
+        #     right = right.next
+        # left.next = left.next.next
+
+        # return dummy.next
