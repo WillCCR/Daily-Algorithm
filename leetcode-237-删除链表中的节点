@@ -1,0 +1,4 @@
+#只告诉要删除的节点
+
+    node.val = node.next.val
+    node.next = nede.next.next
